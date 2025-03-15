@@ -1,42 +1,176 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss";
+
+/* ✅ Hide Clerk Dev Badge */
+.clerk-dev-badge {
+  display: none !important;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ✅ Fix for Secondary Account Names in Clerk UI */
+.cl-userPreviewText,
+.cl-userPreviewEmail,
+.cl-userButtonPopoverRow {
+  color: #fff !important; /* ✅ Forces white text for secondary accounts */
+}
+
+/* ✅ Ensures dropdown background matches the dark theme */
+.cl-userButtonPopover {
+  background-color: var(--dark-2) !important;
+}
+
+/* ✅ Ensures "Add Account" section text remains white */
+.cl-userButtonPopoverFooter {
+  color: #fff !important;
+}
+
+/* ✅ Fix "Manage Account" & "Sign Out" text */
+.cl-userButtonPopoverActionButton {
+  color: #fff !important;
+}
+
+/* ✅ Change hover background for better visibility */
+.cl-userButtonPopoverActionButton:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ✅ Ensure icons remain visible */
+.cl-userButtonPopoverActionButtonIcon {
+  color: #fff !important;
+}
+
+/* ✅ Make "Security" text & icon white */
+.cl-navbarButtonText,
+.cl-navbarButtonIcon {
+  color: #fff !important;
+}
+
+/* ✅ Improve button hover background */
+.cl-navbarButton:hover {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* ✅ Ensure the "Primary" badge text is white */
+.cl-badge[data-localization-key="badge__primary"] {
+  color: #fff !important;
+  background-color: #0E78F9 !important;
+}
+/* ✅ Force secondary account name & identifier to be white */
+.cl-userPreviewMainIdentifier,
+.cl-userPreviewSecondaryIdentifier {
+  color: #fff !important;  /* Forces white text */
+}
+
+/* ✅ Ensure the account switcher dropdown has a proper dark background */
+.cl-userButtonPopover {
+  background-color: var(--dark-2) !important; /* Matches your dark theme */
+}
+
+/* ✅ Make sure other popover text (like buttons) are also white */
+.cl-userButtonPopoverActionButton,
+.cl-userButtonPopoverFooter {
+  color: #fff !important;
+}
+
+
+/* === Glassmorphism Effects === */
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.glassmorphism2 {
+  background: rgba(18, 17, 17, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* ✅ Optional: Add a slight border for better contrast */
+.cl-badge {
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+}
+
+/* === Custom Theme Variables === */
+@theme {
+  /* Dark Mode Colors */
+  --dark-1: #1C1F2E;
+  --dark-2: #161925;
+  --dark-3: #252A41;
+  --dark-4: #1E2757;
+
+  /* Primary Colors */
+  --blue-1: #0E78F9;
+  --sky-1: #C9DDFF;
+  --sky-2: #ECF0FF;
+  --sky-3: #F5FCFF;
+  --orange-1: #FF742E;
+  --purple-1: #830EF9;
+  --yellow-1: #F9A90E;
+
+  /* Container Settings */
+  --container-padding: 2rem;
+  --breakpoint-2xl: 1400px;
+}
+
+/* === Custom Animations === */
+@keyframes accordion-down {
+  from { height: 0; }
+  to { height: var(--radix-accordion-content-height); }
+}
+
+@keyframes accordion-up {
+  from { height: var(--radix-accordion-content-height); }
+  to { height: 0; }
+}
+
+/* === Custom Utilities === */
+@layer utilities {
+  /* ✅ Animations */
+  .animate-accordion-down {
+    animation: accordion-down 0.2s ease-out;
+  }
+  .animate-accordion-up {
+    animation: accordion-up 0.2s ease-out;
+  }
+
+  /* ✅ Background Colors */
+  .bg-dark-1 { background-color: var(--dark-1); }
+  .bg-dark-2 { background-color: var(--dark-2); }
+  .bg-dark-3 { background-color: var(--dark-3); }
+  .bg-dark-4 { background-color: var(--dark-4); }
+
+  .bg-blue-1 { background-color: var(--blue-1); }
+  .bg-sky-1 { background-color: var(--sky-1); }
+  .bg-sky-2 { background-color: var(--sky-2); }
+  .bg-sky-3 { background-color: var(--sky-3); }
+
+  .bg-orange-1 { background-color: var(--orange-1); }
+  .bg-purple-1 { background-color: var(--purple-1); }
+  .bg-yellow-1 { background-color: var(--yellow-1); }
+
+  /* ✅ Background Image */
+  .bg-hero {
+    background-image: url('/images/hero-background.png');
   }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+/* === Container Utility === */
+@layer components {
+  .container {
+    max-width: var(--breakpoint-2xl);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--container-padding);
+    padding-right: var(--container-padding);
   }
+}
+
+/* ✅ Clerk Fix: Override Dark Mode Issues */
+.cl-userButtonPopoverFooter,
+.cl-userPreviewText,
+.cl-userButtonPopover {
+  color: white !important;
+}
+
+.cl-userButtonPopover {
+  background-color: #1c1f2e !important;
 }
