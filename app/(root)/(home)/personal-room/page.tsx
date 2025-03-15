@@ -32,7 +32,7 @@ const PersonalRoom = () => {
   const client = useStreamVideoClient();
 
   const meetingId = user?.id;
-  const [call, isLoading] = useGetCallById(meetingId!);
+  const [call] = useGetCallById(meetingId!);
   const startRoom = async () => {
     if (!client || !user) return;
 
