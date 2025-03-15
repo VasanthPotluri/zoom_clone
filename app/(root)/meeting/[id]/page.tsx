@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import { useUser } from "@clerk/nextjs";
 import { StreamCall, StreamTheme } from "@stream-io/video-react-sdk";
 import React, { useState } from "react";
@@ -10,7 +10,7 @@ import Loader from "@/components/Loader";
 
 const MeetingPage = () => {  
   const { id } = useParams();
-  const { user, isLoaded } = useUser();
+  const { isLoaded } = useUser(); // ✅ Removed 'user' since it's unused
   const [isSetupComplete, setIsSetupComplete] = useState(false);
 
   const [call, isCallLoading] = useGetCallById(id ?? ""); // ✅ Now correctly receives an array
@@ -30,4 +30,5 @@ const MeetingPage = () => {
 };
 
 export default MeetingPage;
+
 
