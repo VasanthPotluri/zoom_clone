@@ -51,7 +51,8 @@ const MeetingRoom = () => {
           <CallLayout />
         </div>
         <div
-          className={cn('h-[calc(100vh-86px)] hidden ml-2', {
+          className={cn('h-[calc(100vh-86px)]  ml-2', {
+            'hidden':!showParticipants,
             'show-block': showParticipants,
           })}>
             <CallParticipantsList onClose={() => setShowParticipants(false)} />
